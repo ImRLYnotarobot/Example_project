@@ -1,0 +1,117 @@
+[
+{
+    "model": "students.group",
+    "pk": 1,
+    "fields": {
+        "name": "sm-228",
+        "headman": 112779
+    }
+},
+{
+    "model": "students.group",
+    "pk": 2,
+    "fields": {
+        "name": "sm-666",
+        "headman": null
+    }
+},
+{
+    "model": "students.student",
+    "pk": 112779,
+    "fields": {
+        "first_name": "Ivan1",
+        "last_name": "Ivanov1",
+        "middle_name": "Ivanovich1",
+        "birth_d": "1995-12-30",
+        "group_id": 1
+    }
+},
+{
+    "model": "students.student",
+    "pk": 987432,
+    "fields": {
+        "first_name": "Ivan2",
+        "last_name": "Ivanov2",
+        "middle_name": "Ivanovich2",
+        "birth_d": "1995-12-30",
+        "group_id": 2
+    }
+},
+{
+    "model": "students.student",
+    "pk": 234567,
+    "fields": {
+        "first_name": "Ivan3",
+        "last_name": "Ivanov3",
+        "middle_name": "Ivanovich3",
+        "birth_d": "1995-12-30",
+        "group_id": 2
+    }
+},
+{
+    "model": "students.student",
+    "pk": 876543,
+    "fields": {
+        "first_name": "Ivan4",
+        "last_name": "Ivanov4",
+        "middle_name": "Ivanovich4",
+        "birth_d": "1995-12-30",
+        "group_id": 2
+    }
+},
+{
+    "model": "students.student",
+    "pk": 121779,
+    "fields": {
+        "first_name": "Ivan5",
+        "last_name": "Ivanov5",
+        "middle_name": "Ivanovich5",
+        "birth_d": "1995-12-30",
+        "group_id": 1
+    }
+},
+{
+    "model": "students.student",
+    "pk": 987665,
+    "fields": {
+        "first_name": "Ivan6",
+        "last_name": "Ivanov6",
+        "middle_name": "Ivanovich6",
+        "birth_d": "1995-12-30",
+        "group_id": 1
+    }
+},
+{
+    "model": "students.student",
+    "pk": 565578,
+    "fields": {
+        "first_name": "Ivan7",
+        "last_name": "Ivanov7",
+        "middle_name": "Ivanovich7",
+        "birth_d": "1995-12-30",
+        "group_id": 1
+    }
+},
+{
+    "model": "students.student",
+    "pk": 223536,
+    "fields": {
+        "first_name": "Ivan8",
+        "last_name": "Ivanov8",
+        "middle_name": "Ivanovich8",
+        "birth_d": "1995-12-30",
+        "group_id": 1
+    }
+},
+{
+    "model": "students.student",
+    "pk": 456675,
+    "fields": {
+        "first_name": "Ivan9",
+        "last_name": "Ivanov9",
+        "middle_name": "Ivanovich9",
+        "birth_d": "1995-12-30",
+        "group_id": 1
+    }
+}
+]

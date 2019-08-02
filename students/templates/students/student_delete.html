@@ -1,0 +1,17 @@
+{% extends 'project_base.html' %}
+
+{% block title %}
+    Delete student {{ student.short_name }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="{{ student.get_delete_url }}" method="post">
+        {% csrf_token %}
+        <h2>Do you want to delete student:</h2>
+        <h4>{{ student }}</h4>
+        <button type="submit" class="btn btn-danger">Yes</button>
+    </form>
+    <a href="{{ student.get_absolute_url }}" class="btn btn-info">No</a>
+
+{% endblock %}

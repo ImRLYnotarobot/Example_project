@@ -1,0 +1,23 @@
+{% extends "project_base.html" %}
+
+{% block title %}
+    Edit student
+{% endblock %}
+
+{% block content %}
+    <form action="{{ obj.get_update_url }}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label }}
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-info">Send</button>
+    </form>
+{% endblock %}

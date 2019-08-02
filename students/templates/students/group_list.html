@@ -1,0 +1,64 @@
+{% extends 'project_base.html' %}
+{% load static %}
+
+{% block title %}
+    Groups
+{% endblock title %}
+
+{% block content %}
+    <table class='table table-bordered table-condensed table-striped table-hover'>
+        <tr><th>Group</th><th>Students</th><th>Headman</th></tr>
+        {% for group in group_page.object_list %}
+            <tr class="table-row"data-href="{% url 'group_detail' group.id %}">
+                <td>{{ group.name }}</td>
+                <td>{{ group.total_students }}</td>
+                <td>{{ group.headman.short_name }}</td>
+            </tr>
+        {% endfor %}
+        <tr class="table-row" data-href="{% url 'group_create' %}">
+                <td class="table-info" colspan=3>Create new</td>
+            </tr>
+    </table>
+{% endblock content %}
+
+
+
+{% block footer_like %}
+    {% if group_page.object_list %}
+
+        <nav id="paginator">
+            <ul class="pagination">
+                {% if not group_page.has_next and group_page.number == 1 %}
+                    <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+
+
+                {% else %}
+                    {% if group_page.number != 1 %}
+                        <li class="page-item"><a class="page-link" href="?page={{ blog_page.previous_page_number }}">Previous</a>
+                        </li>
+                    {% endif %}
+
+                    {% for n in group_page.paginator.page_range %}
+                        {% if n == group_page.number %}
+                            <li class="page-item active"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                        {% elif n > group_page.number|add:-3 and n < group_page.number|add:3 %}
+                            <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if group_page.has_next %}
+                        <li class="page-item"><a class="page-link"
+                                                 href="?page={{ group_page.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock %}
+
+
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/my_jquery.js' %}"></script>
+{% endblock scripts %}

@@ -1,0 +1,9 @@
+{% extends 'project_base.html' %}
+
+{% block content %}
+    {% include 'accounts/form.html' with form=form %}
+{% endblock content %}
+
+{% block auth_block %}
+    <a href="{% url 'register' %}">Register</a>
+{% endblock auth_block %}

@@ -1,0 +1,20 @@
+{% extends 'project_base.html' %}
+{% load static %}
+
+{% block title %}
+    Student {{ student.id }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ student.short_name }} <a href="{% url 'group_detail' student.group_id.id %}" class="btn btn-primary">{{student.group_id.name}}</a>
+            {% if student.is_headman %}
+            <span class="badge badge-warning">Headman</span>
+            {% endif %}
+        </h1>
+    </div>
+    <div class="container">
+        <a href="{{ student.get_update_url }}" class="btn btn-light">Edit</a>
+        <a href="{{ student.get_delete_url }}" class="btn btn-warning">Delete</a>
+    </div>
+{% endblock content %}

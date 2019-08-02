@@ -1,0 +1,79 @@
+{% load static %}
+{% load custom_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "students/css/index.css" %}">
+    {% block styles %}{% endblock %}
+
+    <title>
+        {% block title %}
+            default title
+        {% endblock %}
+    </title>
+</head>
+
+<body>
+{#<div>#}
+{% block nav %}
+
+    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #7c99d2">
+        <a class="navbar-brand" href="{% url 'group_list' %}">Students</a>
+
+    </nav>
+{% endblock %}
+
+
+
+<div class="row">
+
+    <div class="col-3">
+        <span>{% lorem %}</span>
+    </div>
+
+
+    <div class="col-6">
+        {% block content %}s
+            default content
+        {% endblock %}
+
+        {% block footer_like %}
+            footer_like
+        {% endblock %}
+    </div>
+
+
+
+    <div class="col-3">
+        {% if request.user.is_authenticated %}
+            <div>
+                {{ request.user }}
+                <p><a href="{% url 'logout' %}">Logout</a></p>
+                <p>{% admin_edit user %}</p>
+                <p>Debug mode: {{ settings.DEBUG }}</p>
+            </div>
+
+        {% else %}
+            {% block auth_block %}
+                <div>
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'register' %}">Register</a>
+                </div>     
+            {% endblock auth_block %}
+        {% endif %}
+
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static "jquery/jquery-3.3.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+{% block scripts %}{% endblock %}
+
+</body>
+</html>
+
