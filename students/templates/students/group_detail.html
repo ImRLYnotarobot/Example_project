@@ -25,7 +25,7 @@
                 </tr>
             {% endif %}
         {% endfor %}
-        <tr class="table-row" data-href="{% url 'student_create' %}">
+        <tr class="table-row" data-href="{% url 'student_create' %}?from={{ group.id }}">
             <td class="table-info" colspan=3>Add new student</td>
         </tr>
     </table>

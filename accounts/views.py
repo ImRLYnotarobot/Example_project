@@ -7,25 +7,29 @@ from .forms import UserCreationForm, UserLoginForm
 
 def register(request, *args, **kwargs):
     form = UserCreationForm(request.POST or None)
+    next_url = request.GET.get('next', reverse('group_list'))
     if form.is_valid():
         user = form.save()
         login(request, user)
-        # return redirect()
-        return redirect(reverse('group_list'))
+        return redirect(next_url)
     context = {
-        'form': form
+        'form': form,
+        'next': next_url
     }
     return render(request, 'accounts/register.html', context)
 
 
 def login_view(request, *args, **kwargs):
     form = UserLoginForm(request.POST or None)
+    next_url = request.GET.get('next', reverse('group_list'))
     if form.is_valid():
         user_obj = form.cleaned_data.get('user_obj')
         login(request, user_obj)
-        return redirect(reverse('group_list'))
+        redirect_url = request
+        return redirect(next_url)
     context = {
-        'form': form
+        'form': form,
+        'next': next_url
     }
     return render(request, 'accounts/login.html', context)
 

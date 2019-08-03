@@ -3,8 +3,10 @@ from django.db import connection, reset_queries
 
 
 class SimpleMiddleware:
-    '''Adds response generating time and sql hits count before
-    </body> tag'''
+    '''
+    Adds response generating time and sql hits count before
+    </body> tag
+    '''
     def __init__(self, get_response):
         self.get_response = get_response
 

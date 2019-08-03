@@ -1,5 +1,6 @@
-from django.shortcuts import reverse
+from django.shortcuts import reverse, render
 from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .utils import (
     ObjectListMixin,
@@ -7,6 +8,7 @@ from .utils import (
     ObjectCreateMixin,
     ObjectUpdateMixin,
     ObjectDeleteMixin,
+    BasicLoginRequiredMixin,
 )
 from .models import Group, Student
 from .forms import (
@@ -17,7 +19,7 @@ from .forms import (
 )
 
 
-class GroupCreateView(ObjectCreateMixin, View):
+class GroupCreateView(BasicLoginRequiredMixin, ObjectCreateMixin, View):
     form_model = GroupForm
     template = 'students/group_create.html'
 
@@ -33,33 +35,54 @@ class GroupDetailView(ObjectDetailMixin, View):
     template = 'students/group_detail.html'
 
 
-class GroupUpdateView(ObjectUpdateMixin, View):
+class GroupUpdateView(BasicLoginRequiredMixin, ObjectUpdateMixin, View):
     model = Group
     form_model = GroupUpdateForm
     template = 'students/group_update.html'
 
 
-class GroupDeleteView(ObjectDeleteMixin, View):
+class GroupDeleteView(BasicLoginRequiredMixin, ObjectDeleteMixin, View):
     model = Group
     template = 'students/group_delete.html'
 
 
-class StudentDetailView(ObjectDetailMixin, View):
+class StudentDetailView(BasicLoginRequiredMixin, ObjectDetailMixin, View):
     model = Student
     template = 'students/student_detail.html'
 
 
-class StudentCreateView(ObjectCreateMixin, View):
+class StudentCreateView(BasicLoginRequiredMixin, ObjectCreateMixin, View):
     form_model = StudentForm
     template = 'students/student_create.html'
 
+    def get(self, request):
+        '''
+        changes behavior in order to
+        take "from" get parameter which represents refer gorup
+        for pretty form render
+        '''
+        init_group_id = request.GET.get('from', None)
+        init_group = None
 
-class StudentUpdateView(ObjectUpdateMixin, View):
+        if init_group_id:
+            queryset = Group.objects.filter(id=init_group_id)
+            if queryset.exists():
+                init_group = queryset[0]
+
+        form = self.form_model()
+        form.fields['group_id'].initial = init_group    # set 'selected' to refer group
+        context = {
+            'form': form,
+        }
+        return render(request, self.template, context=context)
+
+
+class StudentUpdateView(BasicLoginRequiredMixin, ObjectUpdateMixin, View):
     model = Student
     form_model = StudentUpdateForm
     template = 'students/student_update.html'
 
 
-class StudentDeleteView(ObjectDeleteMixin, View):
+class StudentDeleteView(BasicLoginRequiredMixin, ObjectDeleteMixin, View):
     model = Student
     template = 'students/student_delete.html'

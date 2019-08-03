@@ -1,4 +1,8 @@
+{% if next %}
+<form method="POST" action="?next={{ next }}">
+{% else %}
 <form method="POST" action=".">
+{% endif %}
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" name="submit">

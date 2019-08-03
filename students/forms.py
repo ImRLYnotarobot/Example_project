@@ -53,6 +53,7 @@ class StudentForm(forms.ModelForm):
         ]
         widgets = {
             'birth_d': forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD'}),
+            # 'group_id': forms.Select
         }
 
 
